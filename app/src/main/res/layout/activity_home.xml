@@ -40,6 +40,7 @@
         android:ems="10"
         android:hint="Nom d'utilisateur ou email"
         android:inputType="textPersonName"
+        android:textColorHint="#3C3F41"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
