@@ -38,7 +38,7 @@
         android:layout_marginRight="16dp"
         android:background="#23272a"
         android:ems="10"
-        android:hint="Nom d'utilisateur ou email"
+        android:hint="Nom d'utilisateur"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"

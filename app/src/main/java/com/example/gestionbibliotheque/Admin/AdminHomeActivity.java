@@ -5,18 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.gestionbibliotheque.DB.DataBaseHelper;
 import com.example.gestionbibliotheque.R;
+import com.example.gestionbibliotheque.User.ConsultBookActivity;
 
 public class AdminHomeActivity extends AppCompatActivity {
-    Button bAdd, bDelete, bEdit, bConsult;
+    Button bGererLivre, bGererStock, bConsult;
     TextView TVWelcome;
     String username;
     DataBaseHelper DB;
@@ -28,9 +27,8 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         DB = new DataBaseHelper(this);
 
-        bAdd = findViewById(R.id.buttonAddBook);
-        bDelete = findViewById(R.id.buttonDeleteBook);
-        bEdit = findViewById(R.id.buttonEditBook);
+        bGererLivre = findViewById(R.id.buttonGererLivre);
+        bGererStock = findViewById(R.id.buttonGererStock);
         bConsult = findViewById(R.id.buttonConsultBook);
         TVWelcome = findViewById(R.id.TVWelcomeMsg);
 
@@ -47,8 +45,17 @@ public class AdminHomeActivity extends AppCompatActivity {
             }
         }
 
+        bGererLivre.setOnClickListener(view -> {
+            Intent i = new Intent(getApplicationContext(), ManageBookActivity.class);
+            startActivity(i);
+            finish();
+        });
+
         bConsult.setOnClickListener(View -> {
-            Cursor res = DB.getAllDataBook();
+            Intent i = new Intent(getApplicationContext(), ConsultBookActivity.class);
+            startActivity(i);
+            finish();
+            /*Cursor res = DB.getAllDataBook();
 
             if (res.getCount() == 0){
                 showMessage("Error", "Data not found!");
@@ -61,16 +68,10 @@ public class AdminHomeActivity extends AppCompatActivity {
                     buffer.append( "Author: " + res.getString( 2 ) + "\n" );
                     buffer.append( "Categorie: " + res.getString( 3 ) + "\n" );
                     buffer.append( "Date publication: " + res.getString( 4 ) + "\n" );
-                    buffer.append( "Nom image: " + res.getString( 5 ) + "\n" );
+                    buffer.append( "Nom image: " + res.getBlob( 5 ) + "\n" );
                 }
                 showMessage( "Data", buffer.toString() );
-            }
-        });
-
-        bAdd.setOnClickListener(view -> {
-            Intent i = new Intent(getApplicationContext(), AddBookActivity.class);
-            startActivity(i);
-            finish();
+            }*/
         });
     }
 

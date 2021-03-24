@@ -50,7 +50,7 @@ public class AddBookActivity extends AppCompatActivity {
         bBack = findViewById(R.id.buttonBack3);
 
         bBack.setOnClickListener(view -> {
-            Intent i = new Intent(getApplicationContext(), AdminHomeActivity.class);
+            Intent i = new Intent(getApplicationContext(), ManageBookActivity.class);
             startActivity(i);
             finish();
         });
@@ -74,7 +74,7 @@ public class AddBookActivity extends AppCompatActivity {
                 boolean isInserted = DB.insertBook(title,author,category,publish,img);
                 if (isInserted) {
                     Toast.makeText( AddBookActivity.this, "Votre livre à bien été crée", Toast.LENGTH_SHORT ).show();
-                    Intent i = new Intent(getApplicationContext(), AdminHomeActivity.class);
+                    Intent i = new Intent(getApplicationContext(), ManageBookActivity.class);
                     startActivity(i);
                     finish();
                 } else {
@@ -97,7 +97,7 @@ public class AddBookActivity extends AppCompatActivity {
     public static byte[] imageViewToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gestionbibliotheque">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GestionBibliotheque">
-        <activity android:name=".Admin.AddBookActivity"></activity>
+        <activity android:name=".User.ListViewActivity"></activity>
+        <activity android:name=".User.ConsultBookActivity" />
+        <activity android:name=".Admin.ManageBookActivity" />
+        <activity android:name=".Admin.AddBookActivity" />
         <activity android:name=".User.UserHomeActivity" />
         <activity android:name=".Admin.AdminHomeActivity" />
         <activity android:name=".Auth.RegisterActivity" />
@@ -25,6 +31,4 @@
         <activity android:name=".MainActivity" />
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

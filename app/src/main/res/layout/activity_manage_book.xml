@@ -4,48 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AdminHomeActivity">
+    tools:context=".Admin.ManageBookActivity">
 
     <TextView
-        android:id="@+id/TVWelcomeMsg"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="56dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonGererLivre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gerer les livres"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TVWelcomeMsg"
-        app:layout_constraintVertical_bias="0.136" />
-
-    <Button
-        android:id="@+id/buttonGererStock"
+        android:id="@+id/buttonAddBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Gerer les stocks"
+        android:text="Ajouter un livre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGererLivre" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/buttonConsultBook"
+        android:id="@+id/buttonDeleteBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Consultez les livres"
+        android:text="Supprimer un livre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGererStock" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddBook" />
 
+    <Button
+        android:id="@+id/buttonEditBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Modifier un livre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDeleteBook" />
 </androidx.constraintlayout.widget.ConstraintLayout>
