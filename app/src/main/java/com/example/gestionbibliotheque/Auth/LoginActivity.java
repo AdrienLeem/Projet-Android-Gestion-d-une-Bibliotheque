@@ -34,8 +34,6 @@ public class LoginActivity extends AppCompatActivity {
 
         username = findViewById(R.id.editTextUsernameLogin);
         password = findViewById(R.id.editTextPasswordLogin);
-        back = findViewById(R.id.buttonBack2);
-        validate = findViewById(R.id.buttonLoginValidate);
 
         back.setOnClickListener(view -> {
             Intent i = new Intent(getApplicationContext(), HomeActivity.class);

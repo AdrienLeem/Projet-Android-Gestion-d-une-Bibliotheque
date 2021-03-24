@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         viewData.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cursor res = myDB.getAllData();
+                Cursor res = myDB.getAllDataUser();
 
                 if (res.getCount() == 0){
                     showMessage("Error", "Data not found!");

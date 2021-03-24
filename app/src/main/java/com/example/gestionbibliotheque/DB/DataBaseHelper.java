@@ -70,11 +70,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //Insert data in database
     public boolean instertUser(String username, String password, String email, Boolean admin){
-
-        //Get the instance of SQL Database which we have created
         SQLiteDatabase db = getWritableDatabase();
 
-        //To pass all the values in database
+        //Passage des valeurs dans la base de données
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_COL_2, username );
         contentValues.put(USER_COL_3, password );
@@ -86,11 +84,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    //Cursor class is used to move around in the database
-    public Cursor getAllData(){
+    public boolean insertBook(String title, String author, String category, String date, String image) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Passage des valeurs dans la base de données
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BOOK_COL_2, title );
+        contentValues.put(BOOK_COL_3, author );
+        contentValues.put(BOOK_COL_4, category );
+        contentValues.put(BOOK_COL_5, date );
+        contentValues.put(BOOK_COL_6, image );
+
+        long result = db.insert(TABLE_NAME_BOOK, null, contentValues );
+
+        return result != -1;
+    }
+
+    public Cursor getAllDataUser(){
         //Get the data from database
         SQLiteDatabase db = getWritableDatabase();
         return db.rawQuery( "select * from " + TABLE_NAME_USER, null );
+    }
+
+    public Cursor getAllDataBook(){
+        //Get the data from database
+        SQLiteDatabase db = getWritableDatabase();
+        return db.rawQuery( "select * from " + TABLE_NAME_BOOK, null );
     }
 
     public Cursor getAllUsername() {
