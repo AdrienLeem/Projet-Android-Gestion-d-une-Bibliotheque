@@ -13,4 +13,18 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- > EditText -->
+    <style name="EditTextStyle">
+        <item name="android:textColorHint">#6F7278</item>
+        <item name="android:textSize">18dp</item>
+        <item name="background">@drawable/edittext_background</item>
+    </style>
+
+    <!-- > Bouton -->
+    <style name="BoutonStyle">
+        <item name="android:textSize">18dp</item>
+        <item name="backgroundTint">#7289DA</item>
+    </style>
+
 </resources>
