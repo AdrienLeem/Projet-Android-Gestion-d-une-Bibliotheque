@@ -33,8 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextPasswordRegister);
         email = findViewById(R.id.editTextEmailAddressRegister);
         checkBox = findViewById(R.id.checkBoxRegister);
-        back = findViewById(R.id.buttonBack1);
         validate = findViewById(R.id.buttonRegisterValidate);
+        back = findViewById(R.id.buttonBack1);
 
         back.setOnClickListener(view -> {
             Intent i = new Intent(getApplicationContext(), HomeActivity.class);

@@ -31,7 +31,7 @@ public class ConsultBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_consult_book);
 
         listView = findViewById(R.id.ListViewBook);
-        bBack = findViewById(R.id.buttonBack4);
+        bBack = findViewById(R.id.button4);
         DB = new DataBaseHelper(this);
 
         Cursor res = DB.getAllDataBook();

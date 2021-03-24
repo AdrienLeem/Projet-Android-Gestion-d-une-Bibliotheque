@@ -4,48 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AdminHomeActivity">
+    tools:context=".Admin.AdminHomeActivity"
+    android:background="#2c2f33">
 
     <TextView
         android:id="@+id/TVWelcomeMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="TextView"
+        android:layout_marginTop="68dp"
+        android:text="Bonjour, nom"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonGererLivre"
+        style="@style/BoutonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gerer les livres"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TVWelcomeMsg"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintVertical_bias="0.241" />
 
     <Button
         android:id="@+id/buttonGererStock"
+        style="@style/BoutonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="4dp"
         android:text="Gerer les stocks"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonGererLivre" />
 
     <Button
         android:id="@+id/buttonConsultBook"
+        style="@style/BoutonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="4dp"
         android:text="Consultez les livres"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonGererStock" />
+
+    <Button
+        android:id="@+id/buttonBack5"
+        style="@style/BoutonStyle"
+        android:layout_width="56dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/abc_vector_test"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

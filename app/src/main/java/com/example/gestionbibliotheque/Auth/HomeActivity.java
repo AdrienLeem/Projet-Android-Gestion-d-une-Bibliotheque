@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
                         }
                         //Si Password match alors connexion
                         if (listPassword.contains(hash(stringPassword))) {
-                            Toast.makeText(HomeActivity.this, "Vous etes login", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(HomeActivity.this, "Vous etes login", Toast.LENGTH_SHORT).show();
                             if (DB.isAdmin(DB.getAdminByUser(stringUsername))) {
                                 Intent i = new Intent(getApplicationContext(), AdminHomeActivity.class);
                                 i.putExtra("Username", stringUsername);

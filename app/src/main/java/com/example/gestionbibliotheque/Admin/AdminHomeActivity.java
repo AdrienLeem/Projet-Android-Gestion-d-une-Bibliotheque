@@ -10,12 +10,13 @@ import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.gestionbibliotheque.Auth.HomeActivity;
 import com.example.gestionbibliotheque.DB.DataBaseHelper;
 import com.example.gestionbibliotheque.R;
 import com.example.gestionbibliotheque.User.ConsultBookActivity;
 
 public class AdminHomeActivity extends AppCompatActivity {
-    Button bGererLivre, bGererStock, bConsult;
+    Button bGererLivre, bGererStock, bConsult, back;
     TextView TVWelcome;
     String username;
     DataBaseHelper DB;
@@ -32,6 +33,18 @@ public class AdminHomeActivity extends AppCompatActivity {
         bConsult = findViewById(R.id.buttonConsultBook);
         TVWelcome = findViewById(R.id.TVWelcomeMsg);
 
+        back = findViewById(R.id.buttonBack5);
+
+        back.setOnClickListener(view -> {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("Username", "");
+            editor.apply();
+            startActivity(i);
+            finish();
+        });
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Intent intent = getIntent();
 
@@ -41,7 +54,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("Username", username);
                 editor.apply();
-                TVWelcome.setText("Bonjour " + username);
+                TVWelcome.setText("Bonjour, " + username);
             }
         }
 

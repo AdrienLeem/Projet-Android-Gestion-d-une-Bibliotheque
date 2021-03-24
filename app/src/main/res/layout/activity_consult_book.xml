@@ -5,22 +5,27 @@
     android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AdminHomeActivity">
+    tools:context=".Admin.AdminHomeActivity"
+    android:background="#2c2f33">
 
 
     <Button
-        android:id="@+id/buttonBack4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Retour"
+        android:id="@+id/button4"
+        style="@style/BoutonStyle"
+        android:layout_width="56dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/abc_vector_test"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
         android:id="@+id/TitleConsult"
+        style="@style/TitreStyle"
         android:layout_width="376dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
@@ -30,7 +35,6 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:text="Livres"
-        android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
