@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText( RegisterActivity.this, "Veuillez renseignez tous les champs", Toast.LENGTH_SHORT ).show();
             }
             //Vérification que le username et l'Email soit unique
-            else if (!stringUsername.isEmpty() && !stringEmail.isEmpty()) {
+            else {
                 Cursor resUsername = DB.getAllUsername();
                 Cursor resEmail = DB.getAllEmail();
                 //Si data présente, procédure de vérification
@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                             boolean isInserted = DB.instertUser(stringUsername,hash(stringPassword),stringEmail,checkBox.isChecked());
                             if (isInserted) {
                                 Toast.makeText(RegisterActivity.this, "Votre compte a bien été crée !", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                                 startActivity(i);
                                 finish();
                             }
@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                     boolean isInserted = DB.instertUser(stringUsername,hash(stringPassword),stringEmail,checkBox.isChecked());
                     if (isInserted) {
                         Toast.makeText(RegisterActivity.this, "Votre compte a bien été crée !", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(i);
                         finish();
                     }

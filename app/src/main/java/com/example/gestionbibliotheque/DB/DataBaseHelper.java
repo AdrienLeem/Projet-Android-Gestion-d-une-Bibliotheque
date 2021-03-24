@@ -6,21 +6,38 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    //Initialize all the fields needed for database
-    public static final String DATABASE_NAME = "Users.db";
-    public static final String TABLE_NAME = "user";
-    public static final String COL_1 = "ID";
-    public static final String COL_2 = "Username";
-    public static final String COL_3 = "Password";
-    public static final String COL_4 = "Email";
-    public static final String COL_5 = "Admin";
+    //Initialisation de tous les champs nécessaires aux bases de données
+    public static final String DATABASE_NAME = "Bibliotheque.db";
+    public static final String TABLE_NAME_USER = "user";
+    public static final String USER_COL_1 = "ID";
+    public static final String USER_COL_2 = "Username";
+    public static final String USER_COL_3 = "Password";
+    public static final String USER_COL_4 = "Email";
+    public static final String USER_COL_5 = "Admin";
+
+    public static final String TABLE_NAME_BOOK = "book";
+    public static final String BOOK_COL_1 = "ID";
+    public static final String BOOK_COL_2 = "Title";
+    public static final String BOOK_COL_3 = "Author";
+    public static final String BOOK_COL_4 = "Category";
+    public static final String BOOK_COL_5 = "Publish_date";
+    public static final String BOOK_COL_6 = "Image_name";
+
+    public static final String TABLE_NAME_BOOK_USER = "book_user";
+    public static final String BOOK_USER_COL_1 = "ID";
+    public static final String BOOK_USER_COL_2 = "ID_User";
+    public static final String BOOK_USER_COL_3 = "ID_Book";
+    public static final String BOOK_USER_COL_4 = "Date_deb";
+    public static final String BOOK_USER_COL_5 = "Date_fin";
+
     public static final String LBR = "(";
     public static final String RBR = ")";
     public static final String COM = ",";
 
-    //Just pass context of the app to make it simpler
     public DataBaseHelper(Context context) {
         super( context, DATABASE_NAME, null, 2 );
     }
@@ -28,24 +45,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        //Creating table
+        //Creation des tables
+        db.execSQL( "create table " + TABLE_NAME_USER + LBR + USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
+                USER_COL_2 + " TEXT" + COM + USER_COL_3 + " TEXT" + COM + USER_COL_4 + " INTEGER" + COM + USER_COL_5 + " BOOLEAN" + RBR );
 
-        db.execSQL( "create table " + TABLE_NAME + LBR + COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
-                COL_2 + " TEXT" + COM + COL_3 + " TEXT" + COM + COL_4 + " INTEGER" + COM + COL_5 + " BOOLEAN" + RBR );
+        db.execSQL( "create table " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
+                BOOK_COL_2 + " TEXT" + COM + BOOK_COL_3 + " TEXT" + COM + BOOK_COL_4 + " TEXT" + COM + BOOK_COL_5 + " INTEGER" + COM +
+                BOOK_COL_6 + " TEXT" + RBR );
 
-        // Another way of writing the CREATE TABLE query
-       /* db.execSQL( "create table student_data (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Surname TEXT," +
-                "Marks INTEGER, Date TEXT)" );*/
-
+        db.execSQL( "create table " + TABLE_NAME_BOOK_USER + LBR + BOOK_USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
+                BOOK_USER_COL_2 + " INTEGER REFERENCES " + TABLE_NAME_USER + LBR + USER_COL_1 + RBR + COM + BOOK_USER_COL_3 +
+                " INTEGER REFERENCES " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + RBR + COM + BOOK_USER_COL_4 + " DATE" + COM + BOOK_USER_COL_5 + " DATE" + RBR );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
-        //Dropping old table
-        db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME);
+        //Suppression des tables
+        db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME_USER);
+        db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME_BOOK);
+        db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME_BOOK_USER);
         onCreate( db );
-
     }
 
     //Insert data in database
@@ -56,12 +76,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //To pass all the values in database
         ContentValues contentValues = new ContentValues();
-        contentValues.put( COL_2, username );
-        contentValues.put( COL_3, password );
-        contentValues.put( COL_4, email );
-        contentValues.put( COL_5, admin );
+        contentValues.put(USER_COL_2, username );
+        contentValues.put(USER_COL_3, password );
+        contentValues.put(USER_COL_4, email );
+        contentValues.put(USER_COL_5, admin );
 
-        long result = db.insert( TABLE_NAME, null, contentValues );
+        long result = db.insert(TABLE_NAME_USER, null, contentValues );
 
         return result != -1;
     }
@@ -70,22 +90,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getAllData(){
         //Get the data from database
         SQLiteDatabase db = getWritableDatabase();
-        return db.rawQuery( "select * from " + TABLE_NAME, null );
+        return db.rawQuery( "select * from " + TABLE_NAME_USER, null );
     }
 
     public Cursor getAllUsername() {
         SQLiteDatabase db = getWritableDatabase();
-        return db.rawQuery( "select Username from " + TABLE_NAME, null );
+        return db.rawQuery( "select Username from " + TABLE_NAME_USER, null );
     }
 
     public Cursor getAllEmail() {
         SQLiteDatabase db = getWritableDatabase();
-        return db.rawQuery( "select Email from " + TABLE_NAME, null );
+        return db.rawQuery( "select Email from " + TABLE_NAME_USER, null );
     }
 
     public Cursor getPasswordByUser(String username) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.rawQuery( "select Password from " + TABLE_NAME + " where Username = ?", new String[] { username } );
+        return db.rawQuery( "select Password from " + TABLE_NAME_USER + " where Username = ?", new String[] { username } );
+    }
+
+    public Cursor getAdminByUser(String username) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.rawQuery( "select Admin from " + TABLE_NAME_USER + " where Username = ?", new String[] { username } );
+    }
+
+    public boolean isAdmin(Cursor c) {
+        if (c.getCount() != 0) {
+            ArrayList<String> listAdmin = new ArrayList<>();
+            while (c.moveToNext()) {
+                listAdmin.add(c.getString(0));
+            }
+            return listAdmin.contains("1");
+        } else return false;
     }
 
     //Update fields of database using ID (Unique identifier)
@@ -96,47 +131,47 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues(  );
         // When you want to update only name field
         if(password.equals( "" ) && email.equals( "" )){
-            contentValues.put( COL_1, id );
-            contentValues.put( COL_2, username );
+            contentValues.put(USER_COL_1, id );
+            contentValues.put(USER_COL_2, username );
         }
         // When you want to update only surname field
         if(username.equals( "" ) && email.equals( "" )){
-            contentValues.put( COL_1, id );
-            contentValues.put( COL_3, password );
+            contentValues.put(USER_COL_1, id );
+            contentValues.put(USER_COL_3, password );
         }
         // When you want to update only marks field
         if(username.equals( "" ) && password.equals( "" )){
-            contentValues.put( COL_1, id );
-            contentValues.put( COL_4, email );
+            contentValues.put(USER_COL_1, id );
+            contentValues.put(USER_COL_4, email );
         }
         // When you want to update name and surname field
         if(email.equals( "" ) && !username.isEmpty() && !password.isEmpty()){
-            contentValues.put( COL_1, id );
-            contentValues.put( COL_2, username );
-            contentValues.put( COL_3, password );
+            contentValues.put(USER_COL_1, id );
+            contentValues.put(USER_COL_2, username );
+            contentValues.put(USER_COL_3, password );
         }
         // When you want to update marks and surname field
         if(username.isEmpty() && !email.isEmpty() && !password.isEmpty()){
-            contentValues.put( COL_1, id );
-            contentValues.put( COL_3, password );
-            contentValues.put( COL_4, email );
+            contentValues.put(USER_COL_1, id );
+            contentValues.put(USER_COL_3, password );
+            contentValues.put(USER_COL_4, email );
         }
         // When you want to update name and marks field
         if(password.isEmpty() && !username.isEmpty() && !email.isEmpty()){
-            contentValues.put( COL_1, id );
-            contentValues.put( COL_2, username );
-            contentValues.put( COL_4, email );
+            contentValues.put(USER_COL_1, id );
+            contentValues.put(USER_COL_2, username );
+            contentValues.put(USER_COL_4, email );
         }
         // When you want to update every data field
         if(!id.isEmpty() && !username.isEmpty() && !password.isEmpty() && !email.isEmpty()){
-            contentValues.put( COL_1, id );
-            contentValues.put( COL_2, username );
-            contentValues.put( COL_3, password );
-            contentValues.put( COL_4, email );
+            contentValues.put(USER_COL_1, id );
+            contentValues.put(USER_COL_2, username );
+            contentValues.put(USER_COL_3, password );
+            contentValues.put(USER_COL_4, email );
         }
 
         // UPDATE query
-        db.update( TABLE_NAME, contentValues, "ID = ?", new String[]{id} );
+        db.update(TABLE_NAME_USER, contentValues, "ID = ?", new String[]{id} );
         return true;
     }
 
@@ -144,6 +179,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Integer deleteData(String id){
 
         SQLiteDatabase db = getWritableDatabase();
-        return db.delete( TABLE_NAME, "ID = ?", new String [] {id} );
+        return db.delete(TABLE_NAME_USER, "ID = ?", new String [] {id} );
     }
 }

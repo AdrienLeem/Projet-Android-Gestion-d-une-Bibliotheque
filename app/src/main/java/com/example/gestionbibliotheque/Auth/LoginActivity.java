@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.gestionbibliotheque.Admin.AdminHomeActivity;
 import com.example.gestionbibliotheque.DB.DataBaseHelper;
 import com.example.gestionbibliotheque.HomeActivity;
-import com.example.gestionbibliotheque.MainActivity;
 import com.example.gestionbibliotheque.R;
+import com.example.gestionbibliotheque.User.UserHomeActivity;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -47,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             if (stringUsername.isEmpty() || stringPassword.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "Veuillez renseignez tous les champs", Toast.LENGTH_SHORT).show();
             }
-            else if (!stringUsername.isEmpty() && !stringPassword.isEmpty()) {
+            else {
                 Cursor resPassword = DB.getPasswordByUser(stringUsername);
                 //Si data présente, procédure de vérification
                 if (resPassword.getCount() != 0) {
@@ -58,9 +61,18 @@ public class LoginActivity extends AppCompatActivity {
                     //Si Password match alors connexion
                     if (listPassword.contains(hash(stringPassword))) {
                         Toast.makeText(LoginActivity.this, "Vous etes login", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(i);
-                        finish();
+                        if (DB.isAdmin(DB.getAdminByUser(stringUsername))) {
+                            Intent i = new Intent(getApplicationContext(), AdminHomeActivity.class);
+                            i.putExtra("Username",stringUsername);
+                            startActivity(i);
+                            finish();
+                        }
+                        else {
+                            Intent i = new Intent(getApplicationContext(), UserHomeActivity.class);
+                            i.putExtra("Username",stringUsername);
+                            startActivity(i);
+                            finish();
+                        }
                     }
                     //Si Password ne match alors erreur login
                     else {
