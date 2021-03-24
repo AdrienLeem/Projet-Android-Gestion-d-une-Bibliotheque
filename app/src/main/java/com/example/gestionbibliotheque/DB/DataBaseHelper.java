@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -51,7 +52,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL( "create table " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
                 BOOK_COL_2 + " TEXT" + COM + BOOK_COL_3 + " TEXT" + COM + BOOK_COL_4 + " TEXT" + COM + BOOK_COL_5 + " INTEGER" + COM +
-                BOOK_COL_6 + " TEXT" + RBR );
+                BOOK_COL_6 + " INTEGER" + RBR );
 
         db.execSQL( "create table " + TABLE_NAME_BOOK_USER + LBR + BOOK_USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
                 BOOK_USER_COL_2 + " INTEGER REFERENCES " + TABLE_NAME_USER + LBR + USER_COL_1 + RBR + COM + BOOK_USER_COL_3 +
@@ -84,7 +85,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public boolean insertBook(String title, String author, String category, String date, String image) {
+    public boolean insertBook(String title, String author, String category, String date, byte[] image) {
         SQLiteDatabase db = getWritableDatabase();
 
         //Passage des valeurs dans la base de données
@@ -93,7 +94,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(BOOK_COL_3, author );
         contentValues.put(BOOK_COL_4, category );
         contentValues.put(BOOK_COL_5, date );
-        contentValues.put(BOOK_COL_6, image );
+        contentValues.put(BOOK_COL_6, Arrays.toString(image));
 
         long result = db.insert(TABLE_NAME_BOOK, null, contentValues );
 

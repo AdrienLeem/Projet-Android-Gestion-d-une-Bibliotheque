@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,6 +19,8 @@ import com.example.gestionbibliotheque.Auth.RegisterActivity;
 import com.example.gestionbibliotheque.DB.DataBaseHelper;
 import com.example.gestionbibliotheque.R;
 
+import java.io.ByteArrayOutputStream;
+
 public class AddBookActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -25,7 +29,8 @@ public class AddBookActivity extends AppCompatActivity {
     ImageView IVImage;
     Button bAdd, bBack;
     DataBaseHelper DB;
-    String title, author, category, publish, path;
+    String title, author, category, publish;
+    byte[] img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +71,7 @@ public class AddBookActivity extends AppCompatActivity {
                 Toast.makeText( AddBookActivity.this, "Veuillez renseigner tous les champs", Toast.LENGTH_SHORT ).show();
             }
             else {
-                boolean isInserted = DB.insertBook(title,author,category,publish,path);
+                boolean isInserted = DB.insertBook(title,author,category,publish,img);
                 if (isInserted) {
                     Toast.makeText( AddBookActivity.this, "Votre livre à bien été crée", Toast.LENGTH_SHORT ).show();
                     Intent i = new Intent(getApplicationContext(), AdminHomeActivity.class);
@@ -85,7 +90,15 @@ public class AddBookActivity extends AppCompatActivity {
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             IVImage.setImageURI(selectedImage);
-            path = selectedImage.getPath();
+            img = imageViewToByte(IVImage);
         }
+    }
+
+    public static byte[] imageViewToByte(ImageView image) {
+        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 }
