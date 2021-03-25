@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GestionBibliotheque">
-        <activity android:name=".User.ListViewActivity"></activity>
+        <activity android:name=".User.DetailBookActivity"></activity>
+        <activity android:name=".User.ListViewActivity" />
         <activity android:name=".User.ConsultBookActivity" />
         <activity android:name=".Admin.ManageBookActivity" />
         <activity android:name=".Admin.AddBookActivity" />

@@ -24,6 +24,7 @@ public class ConsultBookActivity extends AppCompatActivity {
     Button bBack;
     DataBaseHelper DB;
     ArrayList<Book> listBook = new ArrayList<>();
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +49,17 @@ public class ConsultBookActivity extends AppCompatActivity {
 
         listView.setAdapter(new ListViewBookAdapter(this, this.listBook));
 
-        /*listView.setOnItemClickListener((a, v, position, id) -> {
+        listView.setOnItemClickListener((a, v, position, id) -> {
+            Intent i = new Intent(getApplicationContext(), DetailBookActivity.class);
             Object o = listView.getItemAtPosition(position);
             Book b = (Book) o;
-            Intent i = new Intent(getApplicationContext(), DetailBookActivity.class);
+            i.putExtra("BookID", b.getID());
             startActivity(i);
             finish();
-        });*/
+        });
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String user = preferences.getString("Username", "");
+        user = preferences.getString("Username", "");
 
         bBack.setOnClickListener(View -> {
             if (user.equals("")) {

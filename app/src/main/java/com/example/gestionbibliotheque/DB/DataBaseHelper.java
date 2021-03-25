@@ -113,6 +113,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery( "select * from " + TABLE_NAME_BOOK, null );
     }
 
+    public Cursor getBookbyID(String idBook) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.rawQuery( "select Title, Author, Category, Publish_date, Image_name from " + TABLE_NAME_BOOK + " where ID = ?", new String[] { idBook } );
+    }
+
     public Cursor getAllUsername() {
         SQLiteDatabase db = getWritableDatabase();
         return db.rawQuery( "select Username from " + TABLE_NAME_USER, null );

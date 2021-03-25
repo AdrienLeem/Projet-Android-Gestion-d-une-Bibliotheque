@@ -32,7 +32,6 @@ public class AdminHomeActivity extends AppCompatActivity {
         bGererStock = findViewById(R.id.buttonGererStock);
         bConsult = findViewById(R.id.buttonConsultBook);
         TVWelcome = findViewById(R.id.TVWelcomeMsg);
-
         back = findViewById(R.id.buttonBack5);
 
         back.setOnClickListener(view -> {
