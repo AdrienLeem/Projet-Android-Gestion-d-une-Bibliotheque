@@ -53,12 +53,19 @@ public class AdminHomeActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("Username", username);
                 editor.apply();
-                TVWelcome.setText("Bonjour, " + username);
             }
         }
 
+        TVWelcome.setText("Bonjour, " + preferences.getString("Username", ""));
+
         bGererLivre.setOnClickListener(view -> {
             Intent i = new Intent(getApplicationContext(), ManageBookActivity.class);
+            startActivity(i);
+            finish();
+        });
+
+        bGererStock.setOnClickListener(View -> {
+            Intent i = new Intent(getApplicationContext(), ManageStockActivity.class);
             startActivity(i);
             finish();
         });
@@ -67,32 +74,6 @@ public class AdminHomeActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), ConsultBookActivity.class);
             startActivity(i);
             finish();
-            /*Cursor res = DB.getAllDataBook();
-
-            if (res.getCount() == 0){
-                showMessage("Error", "Data not found!");
-            }
-            else{
-                StringBuffer buffer = new StringBuffer();
-                while (res.moveToNext()){
-                    buffer.append( "ID: " + res.getString( 0 ) + "\n" );
-                    buffer.append( "Title: " + res.getString( 1 ) + "\n" );
-                    buffer.append( "Author: " + res.getString( 2 ) + "\n" );
-                    buffer.append( "Categorie: " + res.getString( 3 ) + "\n" );
-                    buffer.append( "Date publication: " + res.getString( 4 ) + "\n" );
-                    buffer.append( "Nom image: " + res.getBlob( 5 ) + "\n" );
-                }
-                showMessage( "Data", buffer.toString() );
-            }*/
         });
-    }
-
-    private void showMessage(String title, String message) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setCancelable( true );
-        builder.setTitle( title );
-        builder.setMessage( message );
-        builder.show();
     }
 }

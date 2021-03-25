@@ -6,8 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -35,6 +39,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BOOK_USER_COL_4 = "Date_deb";
     public static final String BOOK_USER_COL_5 = "Date_fin";
 
+    public static final String TABLE_NAME_COMMANDE = "commande";
+    public static final String COMMANDE_COL_1 = "ID";
+    public static final String COMMANDE_COL_2 = "Titre";
+    public static final String COMMANDE_COL_3 = "NbExemplaire";
+    public static final String COMMANDE_COL_4 = "Date_commande";
+    public static final String COMMANDE_COL_5 = "Date_livraison";
+
     public static final String LBR = "(";
     public static final String RBR = ")";
     public static final String COM = ",";
@@ -56,7 +67,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL( "create table " + TABLE_NAME_BOOK_USER + LBR + BOOK_USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
                 BOOK_USER_COL_2 + " INTEGER REFERENCES " + TABLE_NAME_USER + LBR + USER_COL_1 + RBR + COM + BOOK_USER_COL_3 +
-                " INTEGER REFERENCES " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + RBR + COM + BOOK_USER_COL_4 + " DATE" + COM + BOOK_USER_COL_5 + " DATE" + RBR );
+                " INTEGER REFERENCES " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + RBR + COM + BOOK_USER_COL_4 + " TEXT" + COM + BOOK_USER_COL_5 + " DATE" + RBR );
+
+        db.execSQL( "create table " + TABLE_NAME_COMMANDE + LBR + COMMANDE_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
+                COMMANDE_COL_2 + " TEXT" + COM + COMMANDE_COL_3 + " TEXT" + COM + COMMANDE_COL_4 + " TEXT" + COM + COMMANDE_COL_5 + " TEXT" + RBR );
     }
 
     @Override
@@ -66,6 +80,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME_USER);
         db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME_BOOK);
         db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME_BOOK_USER);
+        db.execSQL( "DROP TABLE IF EXISTS " + TABLE_NAME_COMMANDE);
         onCreate( db );
     }
 
@@ -97,6 +112,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(BOOK_COL_6, image);
 
         long result = db.insert(TABLE_NAME_BOOK, null, contentValues );
+
+        return result != -1;
+    }
+
+    public boolean insertCommand(String title, String number) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Passage des valeurs dans la base de données
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COMMANDE_COL_2, title );
+        contentValues.put(COMMANDE_COL_3, number );
+        Date date = Calendar.getInstance().getTime();
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dateToday = formatter.format(date);
+        contentValues.put(COMMANDE_COL_4, dateToday );
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, 7);
+        date = c.getTime();
+        String dateLivraison = formatter.format(date);
+        contentValues.put(COMMANDE_COL_5, dateLivraison );
+
+        long result = db.insert(TABLE_NAME_COMMANDE, null, contentValues );
 
         return result != -1;
     }
