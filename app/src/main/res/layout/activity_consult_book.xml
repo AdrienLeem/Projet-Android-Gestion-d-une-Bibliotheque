@@ -5,8 +5,8 @@
     android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AdminHomeActivity"
-    android:background="#2c2f33">
+    android:background="#2c2f33"
+    tools:context=".Admin.AdminHomeActivity">
 
 
     <Button
@@ -37,6 +37,7 @@
         android:text="Livres"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
