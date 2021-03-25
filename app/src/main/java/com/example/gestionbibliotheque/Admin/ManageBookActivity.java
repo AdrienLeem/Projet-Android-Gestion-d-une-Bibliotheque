@@ -39,5 +39,11 @@ public class ManageBookActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         });
+
+        bEditBook.setOnClickListener(View -> {
+            Intent i = new Intent(getApplicationContext(), EditBookActivity.class);
+            startActivity(i);
+            finish();
+        });
     }
 }

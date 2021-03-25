@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GestionBibliotheque">
-        <activity android:name=".Admin.DeleteBookActivity"></activity>
+        <activity android:name=".Admin.DetailEditActivity"></activity>
+        <activity android:name=".Admin.EditBookActivity" />
+        <activity android:name=".Admin.DeleteBookActivity" />
         <activity android:name=".User.DetailBookActivity" />
         <activity android:name=".User.ListViewActivity" />
         <activity android:name=".User.ConsultBookActivity" />

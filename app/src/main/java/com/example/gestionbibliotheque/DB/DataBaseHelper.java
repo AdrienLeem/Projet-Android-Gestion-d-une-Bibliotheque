@@ -158,6 +158,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME_BOOK, "ID = ?", new String [] { id } );
     }
 
+    public boolean updateBook(String id, String title, String author, String category, String publish_date, byte[] image) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues(  );
+        contentValues.put(BOOK_COL_1, id );
+        contentValues.put(BOOK_COL_2, title );
+        contentValues.put(BOOK_COL_3, author );
+        contentValues.put(BOOK_COL_4, category );
+        contentValues.put(BOOK_COL_5, publish_date);
+        contentValues.put(BOOK_COL_6, image);
+
+        db.update(TABLE_NAME_BOOK, contentValues, "ID = ?", new String[] { id } );
+        return true;
+    }
+
     //Update fields of database using ID (Unique identifier)
     public boolean updateData(String id, String username, String password, String email){
 
