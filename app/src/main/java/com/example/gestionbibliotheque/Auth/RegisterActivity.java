@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText( RegisterActivity.this, "Votre Email n'est pas unique", Toast.LENGTH_SHORT ).show();
                         } else {
                             //Si data non présente création du compte
-                            boolean isInserted = DB.instertUser(stringUsername,hash(stringPassword),stringEmail,checkBox.isChecked());
+                            boolean isInserted = DB.insertUser(stringUsername,hash(stringPassword),stringEmail,checkBox.isChecked());
                             if (isInserted) {
                                 Toast.makeText(RegisterActivity.this, "Votre compte a bien été crée !", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);
@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } else {
                     //Si data non présente, création du compte
-                    boolean isInserted = DB.instertUser(stringUsername,hash(stringPassword),stringEmail,checkBox.isChecked());
+                    boolean isInserted = DB.insertUser(stringUsername,hash(stringPassword),stringEmail,checkBox.isChecked());
                     if (isInserted) {
                         Toast.makeText(RegisterActivity.this, "Votre compte a bien été crée !", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);

@@ -24,6 +24,7 @@ public class UserHomeActivity extends AppCompatActivity {
 
         bBack = findViewById(R.id.buttonBack14);
         bCatalogue = findViewById(R.id.buttonCatalogue);
+        bConsult = findViewById(R.id.buttonConsultEmprunt);
         TVUserHome = findViewById(R.id.textViewUserHome);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -40,6 +41,12 @@ public class UserHomeActivity extends AppCompatActivity {
         }
 
         TVUserHome.setText("Bonjour, " + username);
+
+        bConsult.setOnClickListener(View -> {
+            Intent i = new Intent(getApplicationContext(), ConsultEmpruntActivity.class);
+            startActivity(i);
+            finish();
+        });
 
         bCatalogue.setOnClickListener(View -> {
             Intent i = new Intent(getApplicationContext(), CatalogueActivity.class);

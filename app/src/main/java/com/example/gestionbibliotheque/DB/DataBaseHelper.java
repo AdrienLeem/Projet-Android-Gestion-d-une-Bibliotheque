@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -85,7 +84,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //Insert data in database
-    public boolean instertUser(String username, String password, String email, Boolean admin){
+    public boolean insertUser(String username, String password, String email, Boolean admin){
         SQLiteDatabase db = getWritableDatabase();
 
         //Passage des valeurs dans la base de données
@@ -215,6 +214,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery( "select * from " + TABLE_NAME_COMMANDE, null );
     }
 
+    public Cursor getEmpruntByID(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.rawQuery( "select * from " + TABLE_NAME_BOOK_USER + " where ID = ?", new String[] { id } );
+    }
+
+    public Cursor getEmpruntByIDUser(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.rawQuery( "select ID, ID_Book, Date_deb, Date_fin from " + TABLE_NAME_BOOK_USER + " where ID_User = ?", new String[] { id } );
+    }
+
     public Integer deleteBook(String id) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(TABLE_NAME_BOOK, "ID = ?", new String [] { id } );
@@ -223,7 +232,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public boolean updateBook(String id, String title, String author, String category, String publish_date, byte[] image) {
         SQLiteDatabase db = getWritableDatabase();
 
-        ContentValues contentValues = new ContentValues(  );
+        ContentValues contentValues = new ContentValues();
         contentValues.put(BOOK_COL_1, id );
         contentValues.put(BOOK_COL_2, title );
         contentValues.put(BOOK_COL_3, author );
@@ -232,6 +241,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(BOOK_COL_6, image);
 
         db.update(TABLE_NAME_BOOK, contentValues, "ID = ?", new String[] { id } );
+        return true;
+    }
+
+    public boolean updateEmprunt(String id, String date_fin) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BOOK_USER_COL_5, date_fin );
+
+        db.update(TABLE_NAME_BOOK_USER, contentValues, "ID = ?", new String[] { id } );
         return true;
     }
 }

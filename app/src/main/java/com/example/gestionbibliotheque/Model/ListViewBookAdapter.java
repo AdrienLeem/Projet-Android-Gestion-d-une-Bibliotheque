@@ -68,5 +68,4 @@ public class ListViewBookAdapter extends BaseAdapter {
         TextView title;
         TextView author;
     }
-
 }
