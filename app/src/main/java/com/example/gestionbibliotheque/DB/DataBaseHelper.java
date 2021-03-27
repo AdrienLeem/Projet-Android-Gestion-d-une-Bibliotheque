@@ -67,7 +67,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL( "create table " + TABLE_NAME_BOOK_USER + LBR + BOOK_USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
                 BOOK_USER_COL_2 + " INTEGER REFERENCES " + TABLE_NAME_USER + LBR + USER_COL_1 + RBR + COM + BOOK_USER_COL_3 +
-                " INTEGER REFERENCES " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + RBR + COM + BOOK_USER_COL_4 + " TEXT" + COM + BOOK_USER_COL_5 + " DATE" + RBR );
+                " INTEGER REFERENCES " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + RBR + COM + BOOK_USER_COL_4 + " TEXT" + COM + BOOK_USER_COL_5 + " TEXT" + RBR );
 
         db.execSQL( "create table " + TABLE_NAME_COMMANDE + LBR + COMMANDE_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
                 COMMANDE_COL_2 + " TEXT" + COM + COMMANDE_COL_3 + " TEXT" + COM + COMMANDE_COL_4 + " TEXT" + COM + COMMANDE_COL_5 + " TEXT" + RBR );
@@ -139,6 +139,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean insertEmprunt(String idUser, String idBook, String date_deb, String date_fin) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Passage des valeurs dans la base de données
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BOOK_USER_COL_2, idUser );
+        contentValues.put(BOOK_USER_COL_3, idBook );
+        contentValues.put(BOOK_USER_COL_4, date_deb );
+        contentValues.put(BOOK_USER_COL_5, date_fin );
+
+        long result = db.insert(TABLE_NAME_BOOK_USER, null, contentValues );
+
+        return result != -1;
+    }
+
     public Cursor getAllDataBook(){
         //Get the data from database
         SQLiteDatabase db = getWritableDatabase();
@@ -183,6 +198,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
             return listAdmin.contains("1");
         } else return false;
+    }
+
+    public Cursor getIDByUsername(String username) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.rawQuery( "select ID from " + TABLE_NAME_USER + " where Username = ?", new String[] { username } );
+    }
+
+    public Cursor getBookBySearch(String title, String author, String category) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.rawQuery( "select ID, Title, Author, Category, Publish_date, Image_name from " + TABLE_NAME_BOOK + " where Title LIKE ? AND Author LIKE ? AND Category LIKE ?", new String[] { "%" + title + "%", "%" + author + "%", "%" + category + "%" } );
     }
 
     public Cursor getAllDataCommand() {

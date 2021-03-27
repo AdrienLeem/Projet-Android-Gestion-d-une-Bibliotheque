@@ -39,8 +39,6 @@ public class ConsultCommandActivity extends AppCompatActivity {
                 Commande commande = new Commande(res.getString( 0 ), res.getString( 1 ), res.getString( 2 ), res.getString( 3 ), res.getString( 4 ));
                 listCommand.add(commande);
             }
-        } else {
-            Toast.makeText(ConsultCommandActivity.this, "Erreur",Toast.LENGTH_SHORT).show();
         }
 
         listView.setAdapter(new ListViewCommandAdapter(this, this.listCommand));

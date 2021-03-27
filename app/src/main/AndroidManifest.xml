@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GestionBibliotheque">
-        <activity android:name=".Admin.ConsultCommandActivity"></activity>
+        <activity android:name=".User.SearchBookActivity" />
+        <activity android:name=".User.CatalogueActivity" />
+        <activity android:name=".Admin.ConsultCommandActivity" />
         <activity android:name=".Admin.ListViewCommandeActivity" />
         <activity android:name=".Admin.EmpruntBibliothequeActivity" />
         <activity android:name=".Admin.CommandBookActivity" />

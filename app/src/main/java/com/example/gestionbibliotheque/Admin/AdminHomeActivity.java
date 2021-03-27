@@ -1,6 +1,5 @@
 package com.example.gestionbibliotheque.Admin;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.gestionbibliotheque.Auth.HomeActivity;
-import com.example.gestionbibliotheque.DB.DataBaseHelper;
 import com.example.gestionbibliotheque.R;
 import com.example.gestionbibliotheque.User.ConsultBookActivity;
 
@@ -19,14 +17,11 @@ public class AdminHomeActivity extends AppCompatActivity {
     Button bGererLivre, bGererStock, bConsult, back;
     TextView TVWelcome;
     String username;
-    DataBaseHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
-
-        DB = new DataBaseHelper(this);
 
         bGererLivre = findViewById(R.id.buttonGererLivre);
         bGererStock = findViewById(R.id.buttonGererStock);
@@ -34,8 +29,10 @@ public class AdminHomeActivity extends AppCompatActivity {
         TVWelcome = findViewById(R.id.TVWelcomeMsg);
         back = findViewById(R.id.buttonBack5);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Intent intent = getIntent();
+
         back.setOnClickListener(view -> {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("Username", "");
@@ -43,9 +40,6 @@ public class AdminHomeActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         });
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Intent intent = getIntent();
 
         if(intent != null) {
             if (intent.hasExtra("Username")) {
@@ -57,7 +51,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         }
 
         username = preferences.getString("Username", "");
-        TVWelcome.setText("Bonjour, " + preferences.getString("Username", ""));
+        TVWelcome.setText("Bonjour, " + username);
 
         bGererLivre.setOnClickListener(view -> {
             Intent i = new Intent(getApplicationContext(), ManageBookActivity.class);

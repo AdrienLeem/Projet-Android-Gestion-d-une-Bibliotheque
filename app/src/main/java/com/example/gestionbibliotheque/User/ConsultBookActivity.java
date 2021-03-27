@@ -24,7 +24,7 @@ public class ConsultBookActivity extends AppCompatActivity {
     Button bBack;
     DataBaseHelper DB;
     ArrayList<Book> listBook = new ArrayList<>();
-    String user;
+    String user, title, author, category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,27 @@ public class ConsultBookActivity extends AppCompatActivity {
         bBack = findViewById(R.id.button4);
         DB = new DataBaseHelper(this);
 
-        Cursor res = DB.getAllDataBook();
+        Intent intent = getIntent();
 
-        if (!(res.getCount() == 0)){
-            while (res.moveToNext()){
-                Book book = new Book(res.getString( 0 ), res.getString( 1 ), res.getString( 2 ), res.getString( 3 ), res.getString( 4 ), res.getBlob( 5 ));
-                listBook.add(book);
+        if (intent != null) {
+            if (intent.hasExtra("title") && intent.hasExtra("author") && intent.hasExtra("category")) {
+                title = intent.getStringExtra("title");
+                author = intent.getStringExtra("author");
+                category = intent.getStringExtra("category");
+                Cursor resBook = DB.getBookBySearch(title, author, category);
+                while (resBook.moveToNext()) {
+                    Book b = new Book(resBook.getString(0), resBook.getString(1), resBook.getString(2), resBook.getString(3), resBook.getString(4), resBook.getBlob(5));
+                    listBook.add(b);
+                }
+            }
+            else {
+                Cursor res = DB.getAllDataBook();
+                if (!(res.getCount() == 0)){
+                    while (res.moveToNext()){
+                        Book book = new Book(res.getString( 0 ), res.getString( 1 ), res.getString( 2 ), res.getString( 3 ), res.getString( 4 ), res.getBlob( 5 ));
+                        listBook.add(book);
+                    }
+                }
             }
         }
 
@@ -67,7 +82,7 @@ public class ConsultBookActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    Intent i = new Intent(getApplicationContext(), UserHomeActivity.class);
+                    Intent i = new Intent(getApplicationContext(), CatalogueActivity.class);
                     startActivity(i);
                     finish();
                 }
