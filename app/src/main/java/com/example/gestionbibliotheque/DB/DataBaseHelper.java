@@ -30,6 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BOOK_COL_4 = "Category";
     public static final String BOOK_COL_5 = "Publish_date";
     public static final String BOOK_COL_6 = "Image_name";
+    public static final String BOOK_COL_7 = "Description";
 
     public static final String TABLE_NAME_BOOK_USER = "book_user";
     public static final String BOOK_USER_COL_1 = "ID";
@@ -62,7 +63,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL( "create table " + TABLE_NAME_BOOK + LBR + BOOK_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
                 BOOK_COL_2 + " TEXT" + COM + BOOK_COL_3 + " TEXT" + COM + BOOK_COL_4 + " TEXT" + COM + BOOK_COL_5 + " INTEGER" + COM +
-                BOOK_COL_6 + " BLOB" + RBR );
+                BOOK_COL_6 + " BLOB" + COM + BOOK_COL_7 + " TEXT" + RBR );
 
         db.execSQL( "create table " + TABLE_NAME_BOOK_USER + LBR + BOOK_USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT" + COM +
                 BOOK_USER_COL_2 + " INTEGER REFERENCES " + TABLE_NAME_USER + LBR + USER_COL_1 + RBR + COM + BOOK_USER_COL_3 +
@@ -99,7 +100,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public boolean insertBook(String title, String author, String category, String date, byte[] image) {
+    public boolean insertBook(String title, String author, String category, String date, byte[] image, String description) {
         SQLiteDatabase db = getWritableDatabase();
 
         //Passage des valeurs dans la base de données
@@ -109,6 +110,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(BOOK_COL_4, category );
         contentValues.put(BOOK_COL_5, date );
         contentValues.put(BOOK_COL_6, image);
+        contentValues.put(BOOK_COL_7, description);
 
         long result = db.insert(TABLE_NAME_BOOK, null, contentValues );
 
@@ -161,7 +163,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Cursor getBookByID(String idBook) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.rawQuery( "select Title, Author, Category, Publish_date, Image_name from " + TABLE_NAME_BOOK + " where ID = ?", new String[] { idBook } );
+        return db.rawQuery( "select Title, Author, Category, Publish_date, Image_name, Description from " + TABLE_NAME_BOOK + " where ID = ?", new String[] { idBook } );
     }
 
     public Cursor getBookByTitle(String title) {
@@ -229,7 +231,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME_BOOK, "ID = ?", new String [] { id } );
     }
 
-    public boolean updateBook(String id, String title, String author, String category, String publish_date, byte[] image) {
+    public boolean updateBook(String id, String title, String author, String category, String publish_date, byte[] image, String description) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -239,6 +241,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(BOOK_COL_4, category );
         contentValues.put(BOOK_COL_5, publish_date);
         contentValues.put(BOOK_COL_6, image);
+        contentValues.put(BOOK_COL_7, description);
 
         db.update(TABLE_NAME_BOOK, contentValues, "ID = ?", new String[] { id } );
         return true;

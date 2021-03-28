@@ -70,9 +70,9 @@ public class AddBookActivity extends AppCompatActivity {
                 Toast.makeText( AddBookActivity.this, "Veuillez renseigner tous les champs", Toast.LENGTH_SHORT ).show();
             }
             else {
-                boolean isInserted = DB.insertBook(title,author,category,publish,img);
+                boolean isInserted = DB.insertBook(title,author,category,publish,img, description);
                 if (isInserted) {
-                    Toast.makeText( AddBookActivity.this, "Votre livre à bien été crée", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText( AddBookActivity.this, "Création du livre effectuée avec succès !", Toast.LENGTH_SHORT ).show();
                     Intent i = new Intent(getApplicationContext(), ManageBookActivity.class);
                     startActivity(i);
                     finish();

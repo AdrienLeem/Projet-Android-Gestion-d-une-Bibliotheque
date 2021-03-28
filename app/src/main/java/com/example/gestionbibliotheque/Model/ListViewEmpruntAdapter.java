@@ -54,8 +54,8 @@ public class ListViewEmpruntAdapter extends BaseAdapter {
 
         Emprunt emprunt = this.listData.get(position);
 
-        holder.title.setText("Emprunt de " + emprunt.getBook().getTitle());
-        holder.date.setText("Emprunté le : " + emprunt.getDate_deb() + ", A rendre le : " + emprunt.getDate_fin());
+        holder.title.setText("Emprunt de \"" + emprunt.getBook().getTitle() + "\" de " + emprunt.getBook().getAuthor());
+        holder.date.setText("> Emprunté le : " + emprunt.getDate_deb() + " | À rendre le : " + emprunt.getDate_fin());
 
         return convertView;
     }

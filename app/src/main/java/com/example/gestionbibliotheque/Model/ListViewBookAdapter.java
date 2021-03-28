@@ -48,6 +48,7 @@ public class ListViewBookAdapter extends BaseAdapter {
             holder.image = (ImageView) convertView.findViewById(R.id.imageView_book);
             holder.title = (TextView) convertView.findViewById(R.id.textViewListTitle);
             holder.author = (TextView) convertView.findViewById(R.id.textViewListAuthor);
+            holder.description = (TextView) convertView.findViewById(R.id.DescriptionBook);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -59,6 +60,7 @@ public class ListViewBookAdapter extends BaseAdapter {
         byte[] bookImage = book.getImage();
         Bitmap bitmap = BitmapFactory.decodeByteArray(bookImage, 0, bookImage.length);
         holder.image.setImageBitmap(bitmap);
+        holder.description.setText(book.getDescription());
 
         return convertView;
     }
@@ -67,5 +69,6 @@ public class ListViewBookAdapter extends BaseAdapter {
         ImageView image;
         TextView title;
         TextView author;
+        TextView description;
     }
 }

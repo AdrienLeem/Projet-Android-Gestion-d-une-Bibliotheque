@@ -1,16 +1,17 @@
 package com.example.gestionbibliotheque.Model;
 
 public class Book {
-    private String ID, Title, Author, Category, Publish_date;
-    private byte [] image;
+    private String ID, Title, Author, Category, Publish_date, description;
+    private byte[] image;
 
-    public Book(String ID, String title, String author, String category, String publish_date, byte[] image) {
+    public Book(String ID, String title, String author, String category, String publish_date, byte[] image, String description) {
         this.ID = ID;
         this.Title = title;
         this.Author = author;
         this.Category = category;
         this.Publish_date = publish_date;
         this.image = image;
+        this.description = description;
     }
 
     public String getID() {
@@ -36,6 +37,8 @@ public class Book {
     public byte[] getImage() {
         return image;
     }
+
+    public String getDescription() { return description; }
 
     public void setID(String ID) {
         this.ID = ID;
