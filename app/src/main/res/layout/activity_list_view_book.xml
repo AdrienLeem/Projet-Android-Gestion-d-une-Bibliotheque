@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#2c2f33"
     android:layout_height="match_parent">
 
     <ImageView
@@ -19,6 +20,7 @@
 
     <TextView
         android:id="@+id/textViewListTitle"
+        style="@style/RepCategorie"
         android:layout_width="262dp"
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
@@ -34,6 +36,7 @@
 
     <TextView
         android:id="@+id/textViewListAuthor"
+        style="@style/RepCategorie"
         android:layout_width="261dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"

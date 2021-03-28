@@ -67,6 +67,8 @@
     <EditText
         android:id="@+id/editTextCategory2"
         style="@style/EditTextStyle"
+        android:textColor="#FFFFFF"
+        android:background="#23272a"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -77,8 +79,6 @@
         android:ems="10"
         android:hint="Catégorie"
         android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
-        android:background="#23272a"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"

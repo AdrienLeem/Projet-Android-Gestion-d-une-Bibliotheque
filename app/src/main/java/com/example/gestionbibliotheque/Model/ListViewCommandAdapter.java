@@ -16,7 +16,7 @@ public class ListViewCommandAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public ListViewCommandAdapter(Context aContext,  List<Commande> listData) {
+    public ListViewCommandAdapter(Context aContext, List<Commande> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -50,8 +50,8 @@ public class ListViewCommandAdapter extends BaseAdapter {
         }
 
         Commande commande = this.listData.get(position);
-        holder.title.setText("Commande de " + commande.getNbExemplaire() + "x " + commande.getTitle());
-        holder.date.setText("Commandé le : " + commande.getDate_commande() + ", Livraison le : " + commande.getDate_livraison());
+        holder.title.setText("Commande de " + commande.getTitle() + " (x" + commande.getNbExemplaire() + ") ");
+        holder.date.setText("> Commandé le : " + commande.getDate_commande() + "| Livraison le : " + commande.getDate_livraison());
 
         return convertView;
     }

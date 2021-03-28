@@ -19,7 +19,8 @@
         android:layout_marginRight="16dp"
         android:text="Gestion des livres"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack6"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
